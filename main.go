@@ -18,9 +18,13 @@ func main() {
 		return
 	}
 
+	// Create new buffered reader
 	reader := bufio.NewReader(os.Stdin)
+
+	// Initialise empty rune slice
 	var output []rune
 
+	// Infinite loop
 	for {
 		input, _, err := reader.ReadRune()
 		if err != nil && err == io.EOF {
@@ -29,6 +33,8 @@ func main() {
 		output = append(output, input)
 	}
 
+	// Print each unicode character
+	// source: https://pkg.go.dev/fmt
 	for j := 0; j < len(output); j++ {
 		fmt.Printf("%c", output[j])
 	}
