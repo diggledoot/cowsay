@@ -8,8 +8,10 @@ import (
 )
 
 func main() {
+	// Get file information about standard input
 	info, _ := os.Stdin.Stat()
 
+	// Check if input is from a terminal (character device) using a bitwise operation
 	if info.Mode()&os.ModeCharDevice != 0 {
 		fmt.Println("The command  is intended to work with pipes.")
 		fmt.Println("Usage: fortune | gocowsay")
