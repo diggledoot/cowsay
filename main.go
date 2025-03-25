@@ -88,7 +88,7 @@ func main() {
 
 	// Infinite loop
 	for {
-		input, _, err := reader.ReadRune()
+		input, _, err := reader.ReadLine()
 		if err != nil && err == io.EOF {
 			break
 		}
