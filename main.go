@@ -100,7 +100,7 @@ func printFigure(name string) {
 	case "stegosaurus":
 		fmt.Println(stegosaurus)
 	default:
-		fmt.Println("Unknown figure")
+		fmt.Println(cow)
 	}
 }
 
@@ -118,6 +118,7 @@ func main() {
 	// Create new buffered reader
 	reader := bufio.NewReader(os.Stdin)
 
+	// Select figure
 	var figure string
 	flag.StringVar(&figure, "f", "cow", "the figure name. Valid values are `cow` and `stegosaurus`")
 	flag.Parse()
