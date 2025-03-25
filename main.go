@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"io"
 	"os"
@@ -69,6 +70,40 @@ func buildBalloon(lines []string, maxwidth int) string {
 	return strings.Join(ret, "\n")
 }
 
+func printFigure(name string) {
+	var cow = `         \  ^__^
+          \ (oo)\_______
+	    (__)\       )\/\
+	        ||----w |
+	        ||     ||
+		`
+
+	var stegosaurus = `         \                      .       .
+		\                    / ` + "`" + `.   .' "
+		 \           .---.  <    > <    >  .---.
+		  \          |    \  \ - ~ ~ - /  /    |
+		_____           ..-~             ~-..-~
+	   |     |   \~~~\\.'                    ` + "`" + `./~~~/
+	  ---------   \__/                         \__/
+	 .'  O    \     /               /       \  "
+	(_____,    ` + "`" + `._.'               |         }  \/~~~/
+	 ` + "`" + `----.          /       }     |        /    \__/
+		   ` + "`" + `-.      |       /      |       /      ` + "`" + `. ,~~|
+			   ~-.__|      /_ - ~ ^|      /- _      ` + "`" + `..-'
+					|     /        |     /     ~-.     ` + "`" + `-. _  _  _
+					|_____|        |_____|         ~ - . _ _ _ _ _>
+
+  `
+	switch name {
+	case "cow":
+		fmt.Println(cow)
+	case "stegosaurus":
+		fmt.Println(stegosaurus)
+	default:
+		fmt.Println("Unknown figure")
+	}
+}
+
 func main() {
 	// Get file information about standard input
 	info, _ := os.Stdin.Stat()
@@ -83,6 +118,10 @@ func main() {
 	// Create new buffered reader
 	reader := bufio.NewReader(os.Stdin)
 
+	var figure string
+	flag.StringVar(&figure, "f", "cow", "the figure name. Valid values are `cow` and `stegosaurus`")
+	flag.Parse()
+
 	// Initialise empty rune slice
 	var lines []string
 
@@ -95,18 +134,11 @@ func main() {
 		lines = append(lines, string(input))
 	}
 
-	var cow = `         \  ^__^
-          \ (oo)\_______
-	    (__)\       )\/\
-	        ||----w |
-	        ||     ||
-		`
-
 	lines = tabsToSpaces(lines)
 	maxwidth := calculateMaxWidth(lines)
 	messages := normalizeStringsLength(lines, maxwidth)
 	balloon := buildBalloon(messages, maxwidth)
 	fmt.Println(balloon)
-	fmt.Println(cow)
+	printFigure(figure)
 	fmt.Println()
 }
