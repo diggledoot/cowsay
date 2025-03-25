@@ -123,7 +123,7 @@ func main() {
 	flag.StringVar(&figure, "f", "cow", "the figure name. Valid values are `cow` and `stegosaurus`")
 	flag.Parse()
 
-	// Initialise empty rune slice
+	// Initialise empty string slice
 	var lines []string
 
 	// Infinite loop
